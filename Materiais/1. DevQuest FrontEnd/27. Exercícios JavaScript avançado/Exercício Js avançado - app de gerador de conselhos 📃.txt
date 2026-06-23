@@ -1,0 +1,12 @@
+Exercícios JavaScript avançado - Exercício Js avançado - app de gerador de conselhos
+Continuando com o exercício anterior que foi realizado no módulo de exercícios CSS avançado - Flexbox, agora vamos aplicar o JavaScript para gerar os conselhos aleatoriamente diretamente da API de conselhos.
+
+Use os conhecimentos que aprendeu no módulo de JavaScript avançado pra resolvê-lo da melhor forma, leia atentamente a descrição da tarefa.
+
+Tente realizar o exercício sozinho(a), e depois verifique a solução proposta nas anotações.
+
+Link para o exercício proposto:  https://veiled-package-bfe.notion.site/2-Exerc-cio-HTML-CSS-JS-Avan-ado-9be630f69460408384eb5a6b967dbd49
+
+Quando finalizar, não se esqueça de colocar no seu GitHub e compartilhe no Linkedln! 
+
+Boa sorte!

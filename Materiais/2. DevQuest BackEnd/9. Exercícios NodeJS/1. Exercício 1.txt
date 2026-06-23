@@ -1,0 +1,6 @@
+Exercícios NodeJS - Exercício 1
+Chegou a hora de pôr a prova tudo o que você aprendeu nas aulas de Backend com NodeJS . Consulte seus resumos desse módulo para ganhar tempo (se ainda não tem um resumo volte duas casa e comece a fazer um o quanto antes!).
+
+Link para os exercícios: Exercícios NodeJS (https://humane-legend-9f9.notion.site/Exerc-cios-NodeJS-4caccb67f67d4f6dacfc38b140b172b8)
+A resolução se encontra individualmente em cada página.
+Boa sorte!

@@ -1,0 +1,12 @@
+Quest HTML + CSS avançado
+Use os conhecimentos que aprendeu nos módulos de HTML avançado e CSS avançado para resolvê-lo da melhor forma.
+
+Os arquivos necessários para iniciar o desafio se encontram abaixo.
+
+Assim que concluir o desafio, suba o repositório público para o GitHub e envie o link no canal #quests-prontas para ser feita a correção.
+
+Recomendamos que o desafio seja feito com os conceitos de Flexbox para que vocês tenham projetos que se aproximem mais do que é exigido pelo mercado.
+
+Lembrando que o prazo para correção do desafio é em até 7 dias úteis e será enviada diretamente no privado.
+
+Boa sorte!

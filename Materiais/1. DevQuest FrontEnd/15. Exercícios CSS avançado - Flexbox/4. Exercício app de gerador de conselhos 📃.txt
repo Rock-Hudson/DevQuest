@@ -1,0 +1,9 @@
+Exercício CSS Avançado Flexbox - App Gerador de conselhos
+Você está prestes fazer um exercício de HTML e CSS avançado para praticar o que aprendeu até aqui!
+Use os conhecimentos que aprendeu nos módulos de HTML e CSS pra resolvê-lo da melhor forma, leia atentamente a descrição de cada tarefa.
+Tente realizar o exercício sozinho(a), e depois verifique a solução proposta nas anotações.
+Boa sorte!
+Link para o exercício: https://veiled-package-bfe.notion.site/1-Exerc-cio-HTML-CSS-Avan-ado-5a2ab6bc2dba4dd488bc369235d749b2
+A resolução do exercício se encontra ao final do Notion.
+ATENÇÃO LEIA AQUI:
+Os arquivos CSS e JS já estão organizados/linkados corretamente. Não é necessário criar do 0, não se preocupe sobre o arquivo JS por agora, no módulo de execícios JS Avançado esse exercício será continuado.

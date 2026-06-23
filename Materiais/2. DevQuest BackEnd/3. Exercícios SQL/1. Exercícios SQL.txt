@@ -1,0 +1,8 @@
+Exercícios SQL
+Você está prestes a fazer alguns exercícios de SQL para praticar o que aprendeu até aqui!
+Use os conhecimentos que aprendeu no módulo de SQL pra resolvê-los da melhor forma, leia atentamente a descrição de cada tarefa.
+Tente realizar os exercícios sozinho(a), e depois verifique a solução proposta nas anotações.
+Boa sorte!
+Link para os exercícios Exercícios SQL (https://humane-legend-9f9.notion.site/Exerc-cios-SQL-ca13b49a9cb040cfbc884e9b63c3e9c4)
+ATENÇÃO
+A resolução dos exercícios estará junto no Notion juntamente com os scripts comentados.

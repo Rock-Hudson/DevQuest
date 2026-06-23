@@ -1,0 +1,10 @@
+Quest React Base - Desafio 2
+✨ Supere este desafio incrível! ✨
+
+Utilize seus conhecimentos adquiridos no módulo de React Básico para enfrentá-lo da maneira mais brilhante possível! 💪
+
+Faça o download do arquivo PDF, que está anexado aqui, e lá encontrará as instruções para este desafio espetacular! 📥
+
+Após concluí-lo, envie o link do repositório público do GitHub onde você armazenou sua solução.
+
+Boa sorte, e que os desafios estejam ao seu alcance! 🚀
