@@ -6,6 +6,9 @@ Para isso nós estipulamos alguns marcos que você pode seguir para atingir seu 
 
 🎯MARCO NÚMERO 1 - pensar nos teus objetivos de curto e médio prazo. Por exemplo, um objetivo de curto prazo pode ser criar minha primeira página com HTML e CSS em 3 semanas, e um objetivo de médio prazo pode ser terminar todo o curso do DevQuest em 5 meses. Esse marco é só para que você trace esses objetivos, ainda não é o momento de finalizar nenhum deles.
 
+
+
+
 🎯MARCO NÚMERO 2 - estudar e fazer resumos dos módulos de planejamento até os módulos de CSS avançado, sem pular nenhum.
 
 🎯MARCO NÚMERO 3 - fazer o desafio de HTML e CSS avançado e mandar pra gente avaliar.
