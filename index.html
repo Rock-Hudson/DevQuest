@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Study Hub & Tracker</title>
+    <!-- Tailwind CSS para um design moderno estilo Notion/Alura sem pesar o código -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#121214',
+                        darkCard: '#202024',
+                        aluraBlue: '#167bf7'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons para ícones modernos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-darkBg dark:text-gray-100 min-h-screen transition-colors duration-200 font-sans">
+
+    <!-- Topbar -->
+    <header class="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-darkCard sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-blue-600 text-white rounded-lg">
+                <i data-lucide="terminal" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight">DevOps <span class="text-blue-600 dark:text-blue-400">Study Hub</span></h1>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Seu roadmap interativo de estudos</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <!-- Barra de Pesquisa -->
+            <div class="relative hidden md:block">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-gray-400"></i>
+                <input type="text" id="searchDocs" placeholder="Buscar cursos ou labs..." class="pl-10 pr-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64">
+            </div>
+            <!-- Dark Mode Toggle -->
+            <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-500 dark:text-gray-400">
+                <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+                <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+            </</button>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 border-r border-gray-200 dark:border-gray-800 min-h-[calc(100vh-73px)] p-4 hidden md:block bg-white dark:bg-darkCard">
+            <nav class="space-y-1">
+                <button onclick="switchTab('dashboard')" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+                </button>
+                <button onclick="switchTab('roadmap')" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800">
+                    <i data-lucide="map" class="w-4 h-4"></i> Roadmap 2026-2028
+                </button>
+                <button onclick="switchTab('alura')" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> Cursos Alura
+                </button>
+                <button onclick="switchTab('projects')" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800">
+                    <i data-lucide="git-branch" class="w-4 h-4"></i> Projetos Portfólio
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-6 md:p-8 max-w-7xl mx-auto">
+            
+            <!-- TAB: DASHBOARD -->
+            <section id="tab-dashboard" class="tab-content space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Progresso Card -->
+                    <div class="p-6 bg-white dark:bg-darkCard rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-semibold text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider">Progresso Geral</h3>
+                            <span class="p-2 bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400 rounded-lg"><i data-lucide="trending-up" class="w-5 h-5"></i></span>
+                        </div>
+                        <div class="flex items-baseline gap-2 mb-2">
+                            <span id="progressPercent" class="text-3xl font-bold">0%</span>
+                            <span class="text-xs text-gray-400">concluído</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-zinc-700 rounded-full h-2">
+                            <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- Cursos Concluídos -->
+                    <div class="p-6 bg-white dark:bg-darkCard rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-semibold text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider">Cursos Feitos</h3>
+                            <span class="p-2 bg-green-50 text-green-600 dark:bg-green-950 dark:text-green-400 rounded-lg"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+                        </div>
+                        <div class="text-3xl font-bold mb-1" id="completedCount">0 / 0</div>
+                        <p class="text-xs text-gray-400">módulos e trilhas finalizados</p>
+                    </div>
+                    <!-- Conquistas/Gamificação -->
+                    <div class="p-6 bg-white dark:bg-darkCard rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-semibold text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider">Nível DevOps</h3>
+                            <span class="p-2 bg-purple-50 text-purple-600 dark:bg-purple-950 dark:text-purple-400 rounded-lg"><i data-lucide="award" class="w-5 h-5"></i></span>
+                        </div>
+                        <div class="text-2xl font-bold mb-1" id="devOpsRank">Padawan Tech</div>
+                        <p class="text-xs text-gray-400">Próxima conquista: <span class="text-purple-400 font-medium">Iniciando no Terminal</span></p>
+                    </div>
+                </div>
+
+                <!-- Quadro de Avisos / Cronograma Semanal -->
+                <div class="bg-white dark:bg-darkCard rounded-xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5 text-blue-500"></i> Cronograma de Foco Semanal</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-4">
+                        <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                            <span class="text-xs font-semibold text-blue-500 block mb-2">Segunda</span>
+                            <p class="text-sm font-medium">Lógica, Git & Linux</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                            <span class="text-xs font-semibold text-blue-500 block mb-2">Terça</span>
+                            <p class="text-sm font-medium">Redes & Protocolos</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                            <span class="text-xs font-semibold text-blue-500 block mb-2">Quarta</span>
+                            <p class="text-sm font-medium">Containers (Docker)</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                            <span class="text-xs font-semibold text-blue-500 block mb-2">Quinta</span>
+                            <p class="text-sm font-medium">CI/CD & Cloud (Azure)</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                            <span class="text-xs font-semibold text-blue-500 block mb-2">Sexta</span>
+                            <p class="text-sm font-medium">Lab Prático & Portfólio</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: ROADMAP -->
+            <section id="tab-roadmap" class="tab-content hidden space-y-6">
+                <div class="prose dark:prose-invert max-w-none">
+                    <h2 class="text-2xl font-bold">Fases da Jornada DevOps (2026 - 2028)</h2>
+                    <p class="text-gray-500 dark:text-gray-400">Uma trilha lógica estruturada do básico ao avançado.</p>
+                </div>
+                <div class="relative border-l-2 border-blue-500 ml-4 space-y-8">
+                    <!-- Fase 1 -->
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-darkBg"></div>
+                        <span class="text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-950 px-2 py-1 rounded">Fase 1: Fundamentos</span>
+                        <h3 class="text-lg font-bold mt-2">Linux, Redes e Git</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 max-w-2xl">Dominar a linha de comando do Linux, entender como pacotes trafegam na rede (HTTP, DNS, SSH) e versionar código com Git.</p>
+                    </div>
+                    <!-- Fase 2 -->
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gray-300 dark:bg-zinc-700 border-4 border-white dark:border-darkBg"></div>
+                        <span class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">Fase 2: Containers & IAC</span>
+                        <h3 class="text-lg font-bold mt-2">Docker e Terraform</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 max-w-2xl">Aprender a empacotar aplicações em containers isolados e gerenciar infraestrutura escrevendo código puro.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: ALURA -->
+            <section id="tab-alura" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold">Trilha Estruturada Alura</h2>
+                        <p class="text-gray-500 dark:text-gray-400">Marque os cursos conforme for concluindo na plataforma.</p>
+                    </div>
+                </div>
+
+                <div id="coursesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Injetado dinamicamente via JS -->
+                </div>
+            </section>
+
+            <!-- TAB: PROJECTS -->
+            <section id="tab-projects" class="tab-content hidden space-y-6">
+                <h2 class="text-2xl font-bold">Projetos de Portfólio Recomendados</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-white dark:bg-darkCard rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+                        <div class="text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-950 w-max px-2 py-1 rounded">Iniciante / Front-End</div>
+                        <h3 class="text-lg font-bold">Este Tracker de Estudos (DevOps Study Hub)</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Coloque este exato projeto no seu GitHub Pages! Mostra domínio de manipulação do DOM, localstorage e CSS responsivo.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">HTML5</span>
+                            <span class="text-xs bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-darkCard rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+                        <div class="text-xs font-bold text-orange-500 bg-orange-50 dark:bg-orange-950 w-max px-2 py-1 rounded">Intermediário / DevOps</div>
+                        <h3 class="text-lg font-bold">Multi-container Docker App</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Subir uma aplicação simples de Front-End integrada com uma API e um banco de dados usando Docker Compose de forma isolada.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">Docker</span>
+                            <span class="text-xs bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">Docker Compose</span>
+                            <span class="text-xs bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded">Nginx</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script principal da aplicação -->
+    <script>
+        // Dados dos cursos integrados na própria estrutura para não depender de arquivos externos
+        const coursesData = [
+            { id: 1, title: 'Linux Onboarding: Usando a linha de comando', category: 'Fundamentos', duration: '8h', desc: 'Aprenda comandos essenciais, manipulação de arquivos e permissões no terminal.' },
+            { id: 2, title: 'Git e GitHub: Controle e compartilhe seu código', category: 'Fundamentos', duration: '6h', desc: 'Dominar commits, ramificações (branches), merges e resolução de conflitos.' },
+            { id: 3, title: 'Redes de Computadores: O Modelo OSI e TCP/IP', category: 'Infraestrutura', duration: '10h', desc: 'Entenda roteamento, sub-redes, portas de comunicação, protocolos DNS e HTTP.' },
+            { id: 4, title: 'Docker: Criando e gerenciando containers', category: 'Containers', duration: '12h', desc: 'Criar Dockerfiles, gerenciar imagens, volumes de dados e redes isoladas.' }
+        ];
+
+        // Estado da aplicação (Carrega do localStorage se houver)
+        let state = JSON.parse(localStorage.getItem('devops_hub_state')) || {
+            completedCourses: []
+        };
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderCourses();
+            updateDashboard();
+            setupTheme();
+        });
+
+        // Alternância de Abas/Navegação
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'text-blue-600', 'dark:bg-blue-950/50', 'dark:text-blue-400');
+                btn.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-zinc-800');
+            });
+            
+            const activeBtn = event.currentTarget;
+            activeBtn.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-zinc-800');
+            activeBtn.classList.add('bg-blue-50', 'text-blue-600', 'dark:bg-blue-950/50', 'dark:text-blue-400');
+        }
+
+        // Renderizar Cursos Dinamicamente
+        function renderCourses() {
+            const container = document.getElementById('coursesContainer');
+            container.innerHTML = '';
+
+            coursesData.forEach(course => {
+                const isChecked = state.completedCourses.includes(course.id);
+                const card = document.createElement('div');
+                card.className = `p-5 bg-white dark:bg-darkCard rounded-xl border transition-all ${isChecked ? 'border-green-500/50 bg-green-50/10' : 'border-gray-200 dark:border-gray-800'} shadow-sm flex gap-4 items-start`;
+                
+                card.innerHTML = `
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleCourse(${course.id})" class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer">
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase tracking-wider font-bold text-gray-400">${course.category} • ${course.duration}</span>
+                        <h4 class="font-bold text-base ${isChecked ? 'line-through text-gray-400' : ''}">${course.title}</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">${course.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Alternar Status do Curso
+        function toggleCourse(courseId) {
+            const index = state.completedCourses.indexOf(courseId);
+            if (index === -1) {
+                state.completedCourses.push(courseId);
+            } else {
+                state.completedCourses.splice(index, 1);
+            }
+            saveState();
+            renderCourses();
+            updateDashboard();
+        }
+
+        // Atualizar Métricas do Dashboard
+        function updateDashboard() {
+            const total = coursesData.length;
+            const completed = state.completedCourses.length;
+            const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('progressPercent').innerText = `${pct}%`;
+            document.getElementById('progressBar').style.width = `${pct}%`;
+            document.getElementById('completedCount').innerText = `${completed} / ${total}`;
+
+            // Lógica simples de Ranking/Gamificação
+            const rankEl = document.getElementById('devOpsRank');
+            if (pct === 100) rankEl.innerText = 'SRE Master';
+            else if (pct >= 50) rankEl.innerText = 'SysAdmin Prático';
+            else if (pct > 0) rankEl.innerText = 'Terminal Padawan';
+            else rankEl.innerText = 'Iniciante Curioso';
+        }
+
+        // Persistência
+        function saveState() {
+            localStorage.setItem('devops_hub_state', JSON.stringify(state));
+        }
+
+        // Configuração de Tema (Light/Dark Mode)
+        function setupTheme() {
+            const btn = document.getElementById('themeToggle');
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            btn.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
